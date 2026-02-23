@@ -804,6 +804,69 @@ p:last-child {
 }
 
 /* ===================================
+   Community Section
+   =================================== */
+
+.community-section {
+    padding: var(--space-3xl) 0;
+    background-color: var(--color-bg-primary);
+}
+
+.community-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: var(--space-lg);
+    max-width: 900px;
+    margin: 0 auto;
+}
+
+.community-card {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: var(--space-xl);
+    text-align: center;
+    transition: transform var(--transition-base), box-shadow var(--transition-base), border-color var(--transition-base);
+    min-height: 160px;
+}
+
+.community-card:hover {
+    transform: translateY(-6px);
+    box-shadow: var(--shadow-lg), var(--shadow-glow);
+    border-color: var(--color-accent-primary);
+}
+
+.community-card:focus-visible {
+    border-color: var(--color-accent-primary);
+}
+
+.community-icon {
+    width: 48px;
+    height: 48px;
+    fill: var(--color-accent-primary);
+    margin-bottom: var(--space-md);
+    transition: transform var(--transition-base);
+}
+
+.community-card:hover .community-icon {
+    transform: scale(1.1);
+}
+
+.community-name {
+    font-family: var(--font-heading);
+    font-size: var(--text-lg);
+    font-weight: 600;
+    color: var(--color-text-primary);
+    margin-bottom: var(--space-xs);
+}
+
+.community-handle {
+    font-size: var(--text-sm);
+    color: var(--color-text-muted);
+    font-family: var(--font-mono);
+}
+
+/* ===================================
    Support Section
    =================================== */
 
@@ -928,7 +991,8 @@ p:last-child {
 /* Apply animations to sections when they come into view */
 .about-card,
 .platform-card,
-.website-card {
+.website-card,
+.community-card {
     animation: fadeInUp 0.6s ease-out;
     animation-fill-mode: both;
 }
@@ -989,6 +1053,14 @@ p:last-child {
     animation-delay: 0.2s;
 }
 
+.community-card:nth-child(1) {
+    animation-delay: 0.1s;
+}
+
+.community-card:nth-child(2) {
+    animation-delay: 0.2s;
+}
+
 /* ===================================
    Print Styles
    =================================== */
@@ -998,6 +1070,7 @@ p:last-child {
     .site-header,
     .hero-cta,
     .connect-section,
+    .community-section,
     .websites-section,
     .support-section,
     .skip-link {
