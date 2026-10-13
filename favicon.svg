@@ -1,0 +1,6 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" role="img" aria-label="Prof. Aufner">
+  <rect width="64" height="64" rx="12" fill="#121212"/>
+  <path d="M32 5 55 18.5v27L32 59 9 45.5v-27Z" fill="none" stroke="#4ADE80" stroke-width="3" stroke-linejoin="round"/>
+  <path d="M17 44V22h8.5a5 5 0 0 1 0 10H17" fill="none" stroke="#A7F3D0" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/>
+  <path d="M33 44l8-22 8 22M36 37h10" fill="none" stroke="#A7F3D0" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/>
+</svg>
