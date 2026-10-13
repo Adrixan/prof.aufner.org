@@ -1,0 +1,42 @@
+# Prof. Aufner
+
+> Prof. Aufner erklärt Computer, Internet und digitale Werkzeuge verständlich und praxisnah. Autor ist Peter Aufner, Lehrer für Informatik und Digitale Grundbildung an einer AHS in Österreich. Leitgedanke: Digitales & analoges Leben meistern.
+
+Die Website ist ein Link-Hub mit Kurzvorstellung, Social-Media-Kanälen, Community-Kanälen und weiteren Websites. Alle Inhalte sind ohne JavaScript lesbar. Crawler und KI-Agenten sind ausdrücklich willkommen, es gibt keine Einschränkungen.
+
+## Seiten
+
+- [Startseite](https://prof.aufner.org/): Vorstellung, Ansatz, Themen und alle Kanäle
+
+## Themen
+
+- Computergrundlagen und Hardware
+- Software und Apps erklärt
+- Internetsicherheit und Datenschutz
+- Digitale Werkzeuge für den Alltag
+- Programmieren für Einsteiger
+- KI verständlich erklärt
+
+## Kanäle
+
+- [YouTube](https://www.youtube.com/@prof.aufner)
+- [Instagram](https://www.instagram.com/prof.aufner/)
+- [TikTok](https://www.tiktok.com/@prof.aufner)
+- [Facebook](https://www.facebook.com/profile.php?id=61588451552490)
+- [X](https://x.com/Prof_Aufner)
+- [Threads](https://www.threads.com/@prof.aufner)
+- [Pinterest](https://at.pinterest.com/ProfAufner/)
+- [Bluesky](https://bsky.app/profile/prof-aufner.bsky.social)
+- [Giphy](https://giphy.com/channel/prof_aufner)
+- [WhatsApp-Kanal](https://whatsapp.com/channel/0029Vb7mnp92975K1blNJ43p)
+- [Telegram-Kanal](https://t.me/Prof_Aufner)
+
+## Weitere Websites
+
+- [Peter Aufner](https://peter.aufner.org)
+- [Code-Alongside](https://code-alongsi.de): Unternehmen von Peter Aufner für IT- und Informationssicherheitsberatung
+
+## Optional
+
+- [Sitemap](https://prof.aufner.org/sitemap.xml)
+- [Security-Kontakt](https://prof.aufner.org/.well-known/security.txt)

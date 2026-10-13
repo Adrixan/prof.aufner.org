@@ -119,7 +119,7 @@ check / 200
 for p in /styles.css /scripts.js \
          /fonts/inter-latin-400.woff2 /fonts/space-grotesk-latin-700.woff2 \
          /media/Prof.Aufner.Banner-768.webp /media/Prof.Aufner.Banner.png \
-         /favicon.svg /robots.txt /sitemap.xml /.well-known/security.txt; do
+         /favicon.svg /robots.txt /llms.txt /sitemap.xml /.well-known/security.txt; do
     check "$p" 200
 done
 body="$(curl -s --max-time 20 "$SITE_URL/" || true)"
