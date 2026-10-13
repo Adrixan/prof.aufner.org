@@ -1,6 +1,6 @@
 Deployment- und Pruefhinweise (prof.aufner.org)
 
-Der Live-Server meldet "server: nginx". Ob .htaccess dort ausgewertet wird, ist ungeprueft.
+Deployment: deploy/deploy.sh (siehe Kopfkommentar). Der Live-Server (Plesk, nginx als Proxy) meldet "server: nginx".
 Nach dem Deploy pruefen:
 
   curl -sI https://prof.aufner.org/ | grep -iE "content-security|x-content-type|referrer|permissions|cross-origin|strict-transport|x-frame"

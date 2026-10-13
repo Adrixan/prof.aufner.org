@@ -13,9 +13,10 @@ ErrorDocument 404 /404.html
 <IfModule mod_rewrite.c>
     RewriteEngine On
 
-    # HTTPS erzwingen (301)
-    RewriteCond %{HTTPS} !=on
-    RewriteCond %{HTTP:X-Forwarded-Proto} !=https
+    # HTTPS erzwingen (301). Der Host (Plesk-nginx) leitet http bereits um. Diese Regel greift nur,
+    # wenn der Proxy explizit X-Forwarded-Proto: http meldet. Ohne Header passiert nichts, damit
+    # hinter dem Proxy keine Redirect-Schleife entstehen kann.
+    RewriteCond %{HTTP:X-Forwarded-Proto} =http
     RewriteRule ^ https://prof.aufner.org%{REQUEST_URI} [R=301,L]
 
     # Kanonischer Host: www -> Apex (301)
