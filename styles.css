@@ -560,8 +560,8 @@ kbd {
     position: relative;
     z-index: 1;
     max-width: var(--container-max);
-    margin: calc(-1 * var(--space-2xl)) auto 0;
-    padding: 0 var(--container-padding) var(--space-3xl);
+    margin: 0 auto;
+    padding: var(--space-lg) var(--container-padding) var(--space-3xl);
     text-align: center;
 }
 
