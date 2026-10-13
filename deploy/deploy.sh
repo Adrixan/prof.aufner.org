@@ -34,10 +34,17 @@ esac
 log()  { printf '[deploy] %s\n' "$*"; }
 warn() { printf '[deploy] WARNUNG: %s\n' "$*" >&2; }
 die()  { printf '[deploy] FEHLER: %s\n' "$*" >&2; exit 1; }
-remote() { ssh -o BatchMode=yes -o ConnectTimeout=15 "$HOST" "$@"; }
+remote() { ssh "${SSH_OPTS[@]}" "$HOST" "$@"; }
 
 ROOT="$(git rev-parse --show-toplevel)"
 cd "$ROOT"
+# Eine gemultiplexte SSH-Verbindung fuer den ganzen Lauf: der Host sieht einen Login statt rund 20,
+# was Sperren durch Brute-Force-Schutz (fail2ban) vermeidet. Der Socket liegt ausserhalb von $WORK,
+# weil $WORK weiter unten neu angelegt wird. Wird beim Beenden wieder geschlossen.
+mkdir -p "$ROOT/.scratch"
+SSH_OPTS=(-o BatchMode=yes -o ConnectTimeout=15 -o ControlMaster=auto
+          -o ControlPath="$ROOT/.scratch/ssh-deploy.sock" -o ControlPersist=120)
+trap 'ssh "${SSH_OPTS[@]}" -O exit "$HOST" >/dev/null 2>&1 || true' EXIT
 WORK="$ROOT/.scratch/deploy"
 BUILD="$WORK/build"
 BACKUPS="$ROOT/.scratch/deploy-backups"
