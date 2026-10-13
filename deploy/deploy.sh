@@ -53,6 +53,7 @@ if git rev-parse -q --verify "origin/$BRANCH" >/dev/null; then
 fi
 COMMIT="$(git rev-parse --short HEAD)"
 log "Commit $COMMIT, Ziel $HOST:$REMOTE_DIR -> $SITE_URL"
+remote "true" || die "SSH-Verbindung zu $HOST fehlgeschlagen (Server nicht erreichbar oder IP gesperrt)."
 remote "test -d '$REMOTE_DIR'" || die "Remote-Verzeichnis $REMOTE_DIR existiert nicht."
 
 # ---------------------------------------------------------------- Build
