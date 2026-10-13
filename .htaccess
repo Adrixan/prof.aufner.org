@@ -38,9 +38,9 @@ ErrorDocument 404 /404.html
     Header always set Referrer-Policy "strict-origin-when-cross-origin"
     Header always set Permissions-Policy "accelerometer=(), autoplay=(), browsing-topics=(), camera=(), display-capture=(), geolocation=(), gyroscope=(), magnetometer=(), microphone=(), payment=(), usb=()"
     Header always set Cross-Origin-Opener-Policy "same-origin"
-    # HSTS: gleicher Wert wie der Host (6 Monate, mit Subdomains). Preload bewusst nicht gesetzt.
-    # [TODO: Entscheidung: max-age=31536000; includeSubDomains; preload erst nach Pruefung aller Subdomains]
-    Header always set Strict-Transport-Security "max-age=15768000; includeSubDomains"
+    # HSTS: sendet der Host (Plesk-nginx) bereits (max-age=15768000; includeSubDomains).
+    # Ein zweiter Header wuerde doppelt ausgeliefert, deshalb hier nicht gesetzt.
+    # [TODO: Entscheidung zu max-age=31536000; includeSubDomains; preload im Hosting-Panel treffen]
     Header always unset X-Powered-By
     Header unset Server
 
