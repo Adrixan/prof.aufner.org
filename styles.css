@@ -303,6 +303,9 @@ a:hover {
     top: var(--space-md);
     left: var(--space-md);
     z-index: 1000;
+    display: inline-flex;
+    align-items: center;
+    min-height: var(--target-min);
     padding: var(--space-sm) var(--space-md);
     background-color: var(--color-accent);
     color: var(--color-on-accent);
