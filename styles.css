@@ -627,27 +627,6 @@ kbd {
     margin: 0 auto var(--space-2xl);
 }
 
-/* Titel-Erklaerung */
-.title-note {
-    max-width: var(--prose-max);
-    margin: 0 auto;
-    padding: var(--space-xl);
-    border-inline-start: 4px solid var(--color-accent-soft);
-}
-
-.title-note h2 {
-    font-size: var(--text-2xl);
-    margin-bottom: var(--space-md);
-}
-
-/* Platzhalter fuer offene Angaben */
-.todo {
-    color: var(--color-alert);
-    font-family: var(--font-mono);
-    font-size: 0.9em;
-    border-bottom: 1px dotted var(--color-alert);
-}
-
 /* ===================================
    Ueber mich
    =================================== */
@@ -785,7 +764,7 @@ kbd {
 }
 
 /* ===================================
-   Fliesstext-Seiten (Impressum, Datenschutz, KI)
+   Textseiten (404)
    =================================== */
 
 .prose-page {
@@ -800,77 +779,6 @@ kbd {
 .prose h1 {
     font-size: var(--text-4xl);
     margin-bottom: var(--space-sm);
-}
-
-.prose h2 {
-    font-size: var(--text-2xl);
-    margin: var(--space-2xl) 0 var(--space-md);
-    color: var(--color-accent);
-}
-
-.prose h3 {
-    font-size: var(--text-lg);
-    margin: var(--space-lg) 0 var(--space-sm);
-}
-
-.prose ul {
-    margin: 0 0 var(--space-md);
-    padding-left: var(--space-lg);
-    list-style: disc;
-}
-
-.prose li {
-    margin-bottom: var(--space-xs);
-}
-
-.prose li::marker {
-    color: var(--color-accent);
-}
-
-.prose dl {
-    display: grid;
-    grid-template-columns: minmax(0, 1fr);
-    gap: var(--space-xs) var(--space-lg);
-    margin-bottom: var(--space-md);
-}
-
-.prose dt {
-    font-weight: 600;
-    color: var(--color-text);
-}
-
-.prose dd {
-    color: var(--color-text-secondary);
-    margin-bottom: var(--space-sm);
-}
-
-@media (min-width: 40rem) {
-    .prose dl {
-        grid-template-columns: minmax(10rem, 14rem) minmax(0, 1fr);
-    }
-
-    .prose dd {
-        margin-bottom: 0;
-    }
-}
-
-.prose .meta {
-    color: var(--color-text-muted);
-    font-size: var(--text-sm);
-    margin-bottom: var(--space-xl);
-}
-
-.notice {
-    padding: var(--space-md) var(--space-lg);
-    margin: var(--space-lg) 0;
-    border: 1px solid var(--color-alert);
-    border-inline-start-width: 4px;
-    border-radius: var(--radius-md);
-    background: var(--color-surface);
-}
-
-.notice strong {
-    color: var(--color-alert);
 }
 
 /* ===================================
@@ -905,26 +813,6 @@ kbd {
     margin-top: var(--space-xs);
 }
 
-.footer-nav {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-    gap: 0 var(--space-lg);
-}
-
-.footer-nav a {
-    display: inline-flex;
-    align-items: center;
-    min-height: var(--target-min);
-    padding: 0 var(--space-xs);
-    color: var(--color-text-secondary);
-    font-size: var(--text-sm);
-}
-
-.footer-nav a:hover {
-    color: var(--color-accent);
-}
-
 .footer-bottom {
     text-align: center;
     padding-top: var(--space-lg);
@@ -934,6 +822,12 @@ kbd {
 .footer-bottom p {
     font-size: var(--text-sm);
     color: var(--color-text-muted);
+}
+
+.title-footnote {
+    max-width: 40rem;
+    margin: 0 auto var(--space-sm);
+    font-size: var(--text-sm);
 }
 
 @media (min-width: 48rem) {
@@ -1019,18 +913,13 @@ kbd {
     .about-card p,
     .about-card li,
     .about-card h3,
-    .about-card strong,
-    .prose h2,
-    .prose dt,
-    .prose dd,
-    .prose .meta {
+    .about-card strong {
         color: var(--print-text);
     }
 
     .glass-panel,
     .site-footer,
-    .section-alt,
-    .notice {
+    .section-alt {
         background: var(--print-surface);
         border-color: var(--print-border);
         box-shadow: none;
