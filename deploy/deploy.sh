@@ -116,7 +116,7 @@ check() {  # check <pfad> <erwarteter-code>
 log "Smoke-Test ..."
 sleep 2
 check / 200
-for p in /impressum/ /datenschutz/ /ki-transparenz/ /styles.css /scripts.js \
+for p in /datenschutz/ /ki-transparenz/ /styles.css /scripts.js \
          /fonts/inter-latin-400.woff2 /fonts/space-grotesk-latin-700.woff2 \
          /media/Prof.Aufner.Banner-768.webp /media/Prof.Aufner.Banner.png \
          /favicon.svg /robots.txt /sitemap.xml /.well-known/security.txt; do
@@ -137,7 +137,7 @@ hdrs="$(curl -sI --max-time 20 "$SITE_URL/" | tr -d '\r' | tr 'A-Z' 'a-z')"
 for h in content-security-policy x-content-type-options referrer-policy permissions-policy cross-origin-opener-policy strict-transport-security; do
     case "$hdrs" in *"$h:"*) log "  ok   Header $h" ;; *) warn "Header $h fehlt (greift .htaccess?)" ;; esac
 done
-for p in /.gitmodules /.gitignore /.git/HEAD /deploy/deploy.sh /.deploy-manifest; do
+for p in /.gitmodules /.gitignore /.git/HEAD /deploy/deploy.sh /.deploy-manifest /impressum/; do
     c="$(http_code "$SITE_URL$p")"
     case "$c" in 404|403) log "  ok   $p gesperrt ($c)" ;; *) warn "$p ist erreichbar ($c)" ;; esac
 done
