@@ -64,9 +64,14 @@
         <!-- Hero -->
         <section class="hero" aria-labelledby="hero-heading">
             <div class="hero-banner">
-                <img src="/media/Prof.Aufner.Banner.png" width="1536" height="672" class="banner-image"
-                    fetchpriority="high"
-                    alt="Illustration: Prof. Aufner als Anime-Figur mit Haarknoten schreibt an einem Schreibtisch voller Bücher, umgeben von leuchtenden Bildschirmen, vor Bergen und einem See bei Nacht. Schriftzug im Bild: Prof. Aufner, Digitales &amp; analoges Leben meistern.">
+                <picture>
+                    <source type="image/webp"
+                        srcset="/media/Prof.Aufner.Banner-768.webp 768w, /media/Prof.Aufner.Banner-1536.webp 1536w"
+                        sizes="(min-width: 96rem) 1536px, 100vw">
+                    <img src="/media/Prof.Aufner.Banner.png" width="1536" height="672" class="banner-image"
+                        fetchpriority="high"
+                        alt="Illustration: Prof. Aufner als Anime-Figur mit Haarknoten schreibt an einem Schreibtisch voller Bücher, umgeben von leuchtenden Bildschirmen, vor Bergen und einem See bei Nacht. Schriftzug im Bild: Prof. Aufner, Digitales &amp; analoges Leben meistern.">
+                </picture>
             </div>
             <div class="hero-content">
                 <h1 id="hero-heading" class="hero-title">Prof. Aufner</h1>

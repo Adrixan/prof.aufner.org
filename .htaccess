@@ -47,7 +47,7 @@ ErrorDocument 404 /404.html
     <FilesMatch "\.(woff2)$">
         Header set Cache-Control "public, max-age=31536000, immutable"
     </FilesMatch>
-    <FilesMatch "\.(png|jpe?g|svg|ico)$">
+    <FilesMatch "\.(png|jpe?g|webp|svg|ico)$">
         Header set Cache-Control "public, max-age=2592000"
     </FilesMatch>
     <FilesMatch "\.(css|js)$">
