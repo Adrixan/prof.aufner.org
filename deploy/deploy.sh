@@ -22,7 +22,7 @@ KEEP_BACKUPS=10
 EXCLUDES=(.gitignore .gitmodules .kilocode deploy)
 # Alte Artefakte frueherer Deployments, die auf dem Server entfernt werden (nur diese Pfade, ohne rm -rf)
 LEGACY_FILES=(media/Prof.Aufner.portrait.jpg .gitignore .gitmodules)
-LEGACY_DIRS=(.kilocode/glm5-instructions .kilocode)
+LEGACY_DIRS=(.kilocode/glm5-instructions .kilocode impressum)
 
 DRY_RUN=0
 case "${1:-}" in
@@ -132,6 +132,14 @@ if [ "$fail" -ne 0 ]; then
     die "Smoke-Test fehlgeschlagen, Stand zurueckgesetzt. Details oben."
 fi
 
+# ---------------------------------------------------------------- Aufraeumen und Manifest
+if [ -s "$WORK/delete.files" ]; then
+    remote "cd '$REMOTE_DIR' && xargs -r -d '\n' rm -f --" < "$WORK/delete.files"
+fi
+for d in "${LEGACY_DIRS[@]}"; do remote "rmdir '$REMOTE_DIR/$d' 2>/dev/null || true"; done
+# leere Verzeichnisse alter Manifest-Dateien entfernen
+sed -n 's|/[^/]*$||p' "$WORK/delete.files" | LC_ALL=C sort -u -r \
+    | while read -r d; do [ -n "$d" ] && remote "rmdir '$REMOTE_DIR/$d' 2>/dev/null || true" < /dev/null; done
 # Weiche Pruefungen (nur Warnung)
 hdrs="$(curl -sI --max-time 20 "$SITE_URL/" | tr -d '\r' | tr 'A-Z' 'a-z')"
 for h in content-security-policy x-content-type-options referrer-policy permissions-policy cross-origin-opener-policy strict-transport-security; do
@@ -144,13 +152,5 @@ done
 c="$(curl -s -o /dev/null --max-time 20 -w '%{http_code} %{redirect_url}' "https://www.${SITE_URL#https://}/" || true)"
 case "$c" in "301 $SITE_URL/") log "  ok   www -> Apex (301)" ;; *) warn "www-Redirect nicht wie erwartet: $c" ;; esac
 
-# ---------------------------------------------------------------- Aufraeumen und Manifest
-if [ -s "$WORK/delete.files" ]; then
-    remote "cd '$REMOTE_DIR' && xargs -r -d '\n' rm -f --" < "$WORK/delete.files"
-fi
-for d in "${LEGACY_DIRS[@]}"; do remote "rmdir '$REMOTE_DIR/$d' 2>/dev/null || true"; done
-# leere Verzeichnisse alter Manifest-Dateien entfernen
-sed -n 's|/[^/]*$||p' "$WORK/delete.files" | LC_ALL=C sort -u -r \
-    | while read -r d; do [ -n "$d" ] && remote "rmdir '$REMOTE_DIR/$d' 2>/dev/null || true"; done
 remote "cat > '$REMOTE_DIR/.deploy-manifest'" < "$WORK/manifest.new"
 log "Fertig: $COMMIT live auf $SITE_URL"
