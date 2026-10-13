@@ -1,0 +1,5 @@
+# [TODO: Kontakt eintragen, z. B. mailto:security@prof.aufner.org, dann diese Zeile entfernen]
+Contact: mailto:[TODO-kontakt-email]
+Expires: 2027-09-30T23:59:59.000Z
+Preferred-Languages: de, en
+Canonical: https://prof.aufner.org/.well-known/security.txt

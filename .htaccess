@@ -1,0 +1,60 @@
+# Prof. Aufner - Apache-Konfiguration (Primaerkonfiguration laut Hosting-Entscheidung)
+# Gleiche Regeln als nginx-Variante: deploy/nginx-snippet.conf
+# Pruefung nach Deploy: siehe deploy/README.txt
+
+AddDefaultCharset UTF-8
+DirectoryIndex index.html
+Options -Indexes
+ServerSignature Off
+
+ErrorDocument 403 /404.html
+ErrorDocument 404 /404.html
+
+<IfModule mod_rewrite.c>
+    RewriteEngine On
+
+    # HTTPS erzwingen (301). Der Host (Plesk-nginx) leitet http bereits um. Diese Regel greift nur,
+    # wenn der Proxy explizit X-Forwarded-Proto: http meldet. Ohne Header passiert nichts, damit
+    # hinter dem Proxy keine Redirect-Schleife entstehen kann.
+    RewriteCond %{HTTP:X-Forwarded-Proto} =http
+    RewriteRule ^ https://prof.aufner.org%{REQUEST_URI} [R=301,L]
+
+    # Kanonischer Host: www -> Apex (301)
+    RewriteCond %{HTTP_HOST} ^www\.prof\.aufner\.org$ [NC]
+    RewriteRule ^ https://prof.aufner.org%{REQUEST_URI} [R=301,L]
+
+    # Dotfiles und Dot-Verzeichnisse sperren, .well-known bleibt erreichbar
+    RewriteRule (^|/)\.(?!well-known(/|$)) - [R=404,L]
+
+    # Interne und sensible Dateien sperren
+    RewriteRule ^(deploy|scripts-internal)(/|$) - [R=404,L]
+    RewriteRule \.(md|bak|orig|old|swp|map|sql|log|ini|sh|ya?ml|lock)$ - [R=404,L,NC]
+</IfModule>
+
+<IfModule mod_headers.c>
+    Header always set Content-Security-Policy "default-src 'self'; base-uri 'self'; form-action 'self'; frame-ancestors 'none'; object-src 'none'; upgrade-insecure-requests"
+    Header always set X-Content-Type-Options "nosniff"
+    Header always set X-Frame-Options "DENY"
+    Header always set Referrer-Policy "strict-origin-when-cross-origin"
+    Header always set Permissions-Policy "accelerometer=(), autoplay=(), browsing-topics=(), camera=(), display-capture=(), geolocation=(), gyroscope=(), magnetometer=(), microphone=(), payment=(), usb=()"
+    Header always set Cross-Origin-Opener-Policy "same-origin"
+    # HSTS: gleicher Wert wie der Host (6 Monate, mit Subdomains). Preload bewusst nicht gesetzt.
+    # [TODO: Entscheidung: max-age=31536000; includeSubDomains; preload erst nach Pruefung aller Subdomains]
+    Header always set Strict-Transport-Security "max-age=15768000; includeSubDomains"
+    Header always unset X-Powered-By
+    Header unset Server
+
+    # Caching
+    <FilesMatch "\.(woff2)$">
+        Header set Cache-Control "public, max-age=31536000, immutable"
+    </FilesMatch>
+    <FilesMatch "\.(png|jpe?g|webp|svg|ico)$">
+        Header set Cache-Control "public, max-age=2592000"
+    </FilesMatch>
+    <FilesMatch "\.(css|js)$">
+        Header set Cache-Control "public, max-age=86400"
+    </FilesMatch>
+    <FilesMatch "\.(html|txt|xml)$">
+        Header set Cache-Control "no-cache"
+    </FilesMatch>
+</IfModule>
