@@ -8,6 +8,9 @@
 # Aufruf:  deploy/deploy.sh [-n|--dry-run]
 # Konfig:  DEPLOY_HOST (SSH-Alias, Default aufner.org), DEPLOY_DIR (Default prof.aufner.org,
 #          relativ zum SSH-Home), DEPLOY_URL (Default https://prof.aufner.org).
+#          DEPLOY_VIA (optional): SSH-Alias eines Jumphosts. SSH laeuft dann per -J ueber diesen Host,
+#          die Smoke-Tests (curl) werden ebenfalls auf dem Jumphost ausgefuehrt.
+#          Beispiel: DEPLOY_VIA=m11x deploy/deploy.sh
 # Keine Zugangsdaten im Skript: Authentifizierung laeuft ueber ~/.ssh/config und den SSH-Key.
 
 set -euo pipefail
@@ -15,6 +18,7 @@ set -euo pipefail
 HOST="${DEPLOY_HOST:-aufner.org}"
 REMOTE_DIR="${DEPLOY_DIR:-prof.aufner.org}"
 SITE_URL="${DEPLOY_URL:-https://prof.aufner.org}"
+VIA="${DEPLOY_VIA:-}"
 BRANCH="main"
 KEEP_BACKUPS=10
 
@@ -44,7 +48,20 @@ cd "$ROOT"
 mkdir -p "$ROOT/.scratch"
 SSH_OPTS=(-o BatchMode=yes -o ConnectTimeout=15 -o ControlMaster=auto
           -o ControlPath="$ROOT/.scratch/ssh-deploy.sock" -o ControlPersist=120)
-trap 'ssh "${SSH_OPTS[@]}" -O exit "$HOST" >/dev/null 2>&1 || true' EXIT
+[ -n "$VIA" ] && SSH_OPTS+=(-J "$VIA")
+# Zweite gemultiplexte Verbindung zum Jumphost fuer die curl-Smoke-Tests (nur bei DEPLOY_VIA).
+VIA_OPTS=(-o BatchMode=yes -o ConnectTimeout=15 -o ControlMaster=auto
+          -o ControlPath="$ROOT/.scratch/ssh-via.sock" -o ControlPersist=120)
+trap 'ssh "${SSH_OPTS[@]}" -O exit "$HOST" >/dev/null 2>&1 || true
+      [ -n "$VIA" ] && ssh "${VIA_OPTS[@]}" -O exit "$VIA" >/dev/null 2>&1 || true' EXIT
+# curl lokal oder (bei DEPLOY_VIA) auf dem Jumphost
+vcurl() {
+    if [ -n "$VIA" ]; then
+        ssh "${VIA_OPTS[@]}" "$VIA" "curl $(printf '%q ' "$@")"
+    else
+        curl "$@"
+    fi
+}
 WORK="$ROOT/.scratch/deploy"
 BUILD="$WORK/build"
 BACKUPS="$ROOT/.scratch/deploy-backups"
@@ -59,7 +76,7 @@ if git rev-parse -q --verify "origin/$BRANCH" >/dev/null; then
         || warn "HEAD weicht von origin/$BRANCH ab (nicht gepusht oder zurueck)."
 fi
 COMMIT="$(git rev-parse --short HEAD)"
-log "Commit $COMMIT, Ziel $HOST:$REMOTE_DIR -> $SITE_URL"
+log "Commit $COMMIT, Ziel $HOST:$REMOTE_DIR -> $SITE_URL${VIA:+ (via $VIA)}"
 remote "true" || die "SSH-Verbindung zu $HOST fehlgeschlagen (Server nicht erreichbar oder IP gesperrt)."
 remote "test -d '$REMOTE_DIR'" || die "Remote-Verzeichnis $REMOTE_DIR existiert nicht."
 
@@ -115,7 +132,7 @@ tar -C "$BUILD" -cf - -T "$WORK/manifest.new" \
     | remote "tar -xf - -C '$REMOTE_DIR' --no-same-owner --no-same-permissions --no-overwrite-dir"
 
 # ---------------------------------------------------------------- Smoke-Test
-http_code() { curl -s -o /dev/null --max-time 20 -w '%{http_code}' "$1" || true; }
+http_code() { vcurl -s -o /dev/null --max-time 20 -w '%{http_code}' "$1" || true; }
 fail=0
 check() {  # check <pfad> <erwarteter-code>
     local code; code="$(http_code "$SITE_URL$1")"
@@ -130,7 +147,7 @@ for p in /styles.css /scripts.js \
          /favicon.svg /robots.txt /llms.txt /sitemap.xml /.well-known/security.txt; do
     check "$p" 200
 done
-body="$(curl -s --max-time 20 "$SITE_URL/" || true)"
+body="$(vcurl -s --max-time 20 "$SITE_URL/" || true)"
 case "$body" in *"Prof. Aufner"*"Zum Titel Prof."*) log "  ok   Startseite enthaelt erwarteten Inhalt" ;;
                 *) warn "  FAIL Startseite ohne erwarteten Inhalt"; fail=1 ;; esac
 case "$body" in *googleapis.com*|*ko-fi.com/prof_aufner/\?*) warn "  FAIL Drittanbieter-Referenz auf Startseite"; fail=1 ;; esac
@@ -149,7 +166,7 @@ for d in "${LEGACY_DIRS[@]}"; do remote "rmdir '$REMOTE_DIR/$d' 2>/dev/null || t
 sed -n 's|/[^/]*$||p' "$WORK/delete.files" | LC_ALL=C sort -u -r \
     | while read -r d; do [ -n "$d" ] && remote "rmdir '$REMOTE_DIR/$d' 2>/dev/null || true" < /dev/null; done
 # Weiche Pruefungen (nur Warnung)
-hdrs="$(curl -sI --max-time 20 "$SITE_URL/" | tr -d '\r' | tr 'A-Z' 'a-z')"
+hdrs="$(vcurl -sI --max-time 20 "$SITE_URL/" | tr -d '\r' | tr 'A-Z' 'a-z')"
 for h in content-security-policy x-content-type-options referrer-policy permissions-policy cross-origin-opener-policy strict-transport-security; do
     case "$hdrs" in *"$h:"*) log "  ok   Header $h" ;; *) warn "Header $h fehlt (greift .htaccess?)" ;; esac
 done
@@ -157,7 +174,7 @@ for p in /.gitmodules /.gitignore /.git/HEAD /deploy/deploy.sh /.deploy-manifest
     c="$(http_code "$SITE_URL$p")"
     case "$c" in 404|403) log "  ok   $p gesperrt ($c)" ;; *) warn "$p ist erreichbar ($c)" ;; esac
 done
-c="$(curl -s -o /dev/null --max-time 20 -w '%{http_code} %{redirect_url}' "https://www.${SITE_URL#https://}/" || true)"
+c="$(vcurl -s -o /dev/null --max-time 20 -w '%{http_code} %{redirect_url}' "https://www.${SITE_URL#https://}/" || true)"
 case "$c" in "301 $SITE_URL/") log "  ok   www -> Apex (301)" ;; *) warn "www-Redirect nicht wie erwartet: $c" ;; esac
 
 remote "cat > '$REMOTE_DIR/.deploy-manifest'" < "$WORK/manifest.new"
