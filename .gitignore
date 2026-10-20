@@ -2,7 +2,6 @@
 *.md
 
 # Kilocode directory
-.kilocode/
 
 # Scratch / audit output (local only)
 .scratch/
