@@ -1,7 +1,5 @@
 # Markdown files
 *.md
 
-# Kilocode directory
-
 # Scratch / audit output (local only)
 .scratch/
