@@ -31,3 +31,4 @@ Content-Signal: search=yes, ai-input=yes, ai-train=yes
 Allow: /
 
 Sitemap: https://prof.aufner.org/sitemap.xml
+Sitemap: https://prof.aufner.org/blog/sitemap.xml
