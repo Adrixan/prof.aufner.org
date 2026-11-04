@@ -929,3 +929,130 @@ kbd {
         color: var(--print-text);
     }
 }
+
+/* =========================================================================
+   Blog (pages under /blog/ are written by edu-publisher at the publishing slot)
+   ========================================================================= */
+.article-container {
+    max-width: 44rem;
+}
+
+.article-meta {
+    color: var(--color-text-muted);
+    font-size: 0.95rem;
+    margin-bottom: var(--space-md);
+}
+
+.article-cover {
+    margin: var(--space-xl) 0;
+}
+
+.article-cover img {
+    border-radius: var(--radius-lg);
+    border: 1px solid var(--glass-border);
+    width: 100%;
+    height: auto;
+}
+
+.article-body {
+    font-size: 1.125rem;
+    line-height: 1.75;
+}
+
+.article-body h2 {
+    margin-top: var(--space-2xl);
+    margin-bottom: var(--space-md);
+}
+
+.article-body h3 {
+    margin-top: var(--space-xl);
+    margin-bottom: var(--space-sm);
+}
+
+.article-body p,
+.article-body ul,
+.article-body ol,
+.article-body blockquote {
+    margin-bottom: var(--space-lg);
+}
+
+.article-body ul,
+.article-body ol {
+    padding-left: var(--space-xl);
+}
+
+.article-body li + li {
+    margin-top: var(--space-sm);
+}
+
+.article-body blockquote {
+    border-left: 3px solid var(--color-accent-soft);
+    padding: var(--space-sm) var(--space-lg);
+    background: var(--color-surface);
+    border-radius: 0 var(--radius-md) var(--radius-md) 0;
+}
+
+.article-body code {
+    font-family: 'JetBrains Mono', ui-monospace, monospace;
+    background: var(--color-surface-raised);
+    padding: 0.1em 0.35em;
+    border-radius: var(--radius-sm);
+}
+
+.article-follow {
+    margin-top: var(--space-2xl);
+    padding-top: var(--space-lg);
+    border-top: 1px solid var(--glass-border);
+    color: var(--color-text-secondary);
+}
+
+.post-list {
+    list-style: none;
+    padding: 0;
+    display: grid;
+    gap: var(--space-lg);
+    grid-template-columns: repeat(auto-fill, minmax(18rem, 1fr));
+    margin-top: var(--space-xl);
+}
+
+.post-card a {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-sm);
+    height: 100%;
+    padding: var(--space-md);
+    background: var(--glass-bg);
+    border: 1px solid var(--glass-border);
+    border-radius: var(--radius-lg);
+    color: var(--color-text);
+    text-decoration: none;
+}
+
+.post-card a:hover,
+.post-card a:focus-visible {
+    border-color: var(--color-accent);
+}
+
+.post-card img {
+    border-radius: var(--radius-md);
+    width: 100%;
+    height: auto;
+    aspect-ratio: 1200 / 630;
+    object-fit: cover;
+}
+
+.post-card-date {
+    color: var(--color-text-muted);
+    font-size: 0.875rem;
+}
+
+.post-card-title {
+    font-family: var(--font-heading);
+    font-weight: 700;
+    font-size: 1.25rem;
+    color: var(--color-accent-soft);
+}
+
+.post-card-text {
+    color: var(--color-text-secondary);
+}
