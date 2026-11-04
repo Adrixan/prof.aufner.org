@@ -3,3 +3,6 @@
 
 # Scratch / audit output (local only)
 .scratch/
+# Agent state files are tracked so every machine can pick up the work (2026-11-04)
+!.agents/
+!.agents/*.md
