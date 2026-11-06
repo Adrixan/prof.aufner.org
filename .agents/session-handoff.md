@@ -58,3 +58,10 @@ Commits auf Branch: Fonts, Styles, HTML-Refactor, SEO-Assets, Legal-Seiten, Secu
 
 ## Housekeeping 2026-11-01
 - `.scratch/` cleaned; audit.md, contrast.md, verification.md, werbekennzeichnung.md and future-features-todo.md are now in `~/Obsidian/Adrixan/Educator/prof.aufner.org/`. Only the newest deploy backup remains.
+
+## Update 2026-11-06 (edu-publisher code session)
+- Privacy policy `/datenschutz/` and app page `/publisher/` live (d8ce06d) for the Google OAuth verification of the
+  Prof. Aufner Publisher and the comment processing of edu-publisher. Footer links on all pages. deploy.sh no longer
+  deletes `datenschutz/`; its smoke test expects both pages with 200. Rules in AGENTS.md "Legal pages".
+- Peter still: consent screen URLs, DNS TXT for aufner.org at Porkbun (Search Console domain property), demo video,
+  resubmit. Details in edu-publisher `.agents/session-handoff.md`.
