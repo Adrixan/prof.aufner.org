@@ -26,7 +26,8 @@ KEEP_BACKUPS=10
 EXCLUDES=(.gitignore .gitmodules .kilocode deploy)
 # Alte Artefakte frueherer Deployments, die auf dem Server entfernt werden (nur diese Pfade, ohne rm -rf)
 LEGACY_FILES=(media/Prof.Aufner.portrait.jpg .gitignore .gitmodules)
-LEGACY_DIRS=(.kilocode/glm5-instructions .kilocode impressum datenschutz ki-transparenz)
+# datenschutz/ is live again since 2026-11-06 (Google OAuth verification, comment processing)
+LEGACY_DIRS=(.kilocode/glm5-instructions .kilocode impressum ki-transparenz)
 
 DRY_RUN=0
 case "${1:-}" in
