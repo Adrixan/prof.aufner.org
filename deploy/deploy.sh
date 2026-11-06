@@ -171,9 +171,14 @@ hdrs="$(vcurl -sI --max-time 20 "$SITE_URL/" | tr -d '\r' | tr 'A-Z' 'a-z')"
 for h in content-security-policy x-content-type-options referrer-policy permissions-policy cross-origin-opener-policy strict-transport-security; do
     case "$hdrs" in *"$h:"*) log "  ok   Header $h" ;; *) warn "Header $h fehlt (greift .htaccess?)" ;; esac
 done
-for p in /.gitmodules /.gitignore /.git/HEAD /deploy/deploy.sh /.deploy-manifest /impressum/ /datenschutz/ /ki-transparenz/; do
+for p in /.gitmodules /.gitignore /.git/HEAD /deploy/deploy.sh /.deploy-manifest /impressum/ /ki-transparenz/; do
     c="$(http_code "$SITE_URL$p")"
     case "$c" in 404|403) log "  ok   $p gesperrt ($c)" ;; *) warn "$p ist erreichbar ($c)" ;; esac
+done
+# Google OAuth verification: privacy policy and app home page must stay reachable
+for p in /datenschutz/ /publisher/; do
+    c="$(http_code "$SITE_URL$p")"
+    case "$c" in 200) log "  ok   $p erreichbar" ;; *) warn "$p nicht erreichbar ($c): Google-Verifizierung braucht die Seite" ;; esac
 done
 c="$(vcurl -s -o /dev/null --max-time 20 -w '%{http_code} %{redirect_url}' "https://www.${SITE_URL#https://}/" || true)"
 case "$c" in "301 $SITE_URL/") log "  ok   www -> Apex (301)" ;; *) warn "www-Redirect nicht wie erwartet: $c" ;; esac
