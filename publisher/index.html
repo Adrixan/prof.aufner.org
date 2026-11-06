@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="de">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="Content-Security-Policy"
+        content="default-src 'self'; base-uri 'self'; form-action 'self'; object-src 'none'">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Prof. Aufner Publisher</title>
+    <meta name="description" content="Prof. Aufner Publisher: das eigene Werkzeug, das Beiträge von Prof. Aufner auf seinen Kanälen veröffentlicht und Kommentare meldet.">
+    <meta name="referrer" content="strict-origin-when-cross-origin">
+    <meta name="color-scheme" content="dark">
+    <meta name="theme-color" content="#121212">
+    <meta name="robots" content="index,follow">
+    <link rel="canonical" href="https://prof.aufner.org/publisher/">
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml">
+    <link rel="icon" href="/favicon-32.png" type="image/png" sizes="32x32">
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png">
+    <link rel="preload" href="/fonts/inter-latin-400.woff2" as="font" type="font/woff2" crossorigin>
+    <link rel="preload" href="/fonts/space-grotesk-latin-700.woff2" as="font" type="font/woff2" crossorigin>
+    <link rel="stylesheet" href="/styles.css">
+</head>
+
+<body>
+    <a href="#main-content" class="skip-link">Zum Hauptinhalt springen</a>
+
+    <header class="site-header">
+        <nav class="nav-container" aria-label="Hauptnavigation">
+            <a href="/" class="logo"><span class="logo-text">Prof. Aufner</span></a>
+            <ul class="nav-links">
+                <li><a href="/">Startseite</a></li>
+                <li><a href="/blog/">Blog</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main id="main-content" class="prose-page">
+        <div class="container">
+            <article class="prose article-body">
+                <h1>Prof. Aufner Publisher</h1>
+                <p class="meta">Ein eigenes Werkzeug von Peter Aufner · <a href="#english">English</a> ·
+                    <a href="/datenschutz/">Datenschutzerklärung</a></p>
+
+                <h2>Was der Publisher macht</h2>
+                <p>
+                    Der Prof. Aufner Publisher ist ein privates Werkzeug, das ich (Peter Aufner, Prof. Aufner) für meine
+                    eigenen Kanäle betreibe. Niemand sonst meldet sich an, es gibt keine Benutzerkonten.
+                </p>
+                <ul>
+                    <li><strong>Veröffentlichen:</strong> Er stellt meine fertigen Bildungsbeiträge zur geplanten Zeit auf
+                        meinen Kanälen online: YouTube, Instagram, Threads, Facebook, Bluesky, Telegram und dieser Blog.</li>
+                    <li><strong>Kommentare melden:</strong> Er liest öffentliche Kommentare zu meinen eigenen Beiträgen und
+                        schickt mir viermal am Tag eine Übersicht in meinen privaten Telegram-Chat, damit ich antworten kann.
+                        Hinweise auf Mobbing oder Gefahr meldet er sofort. Namen und Profile speichert er nicht.</li>
+                    <li><strong>Statistik:</strong> Er sammelt Summen zu meinen eigenen Beiträgen (Aufrufe, Likes,
+                        Wiedergabezeit) und die Zahl meiner Follower.</li>
+                </ul>
+
+                <h2>Zugriff auf YouTube</h2>
+                <p>Für meinen eigenen Kanal @prof.aufner nutzt der Publisher diese Google-Berechtigungen:</p>
+                <ul>
+                    <li><code>youtube.upload</code>: eigene Videos und Vorschaubilder hochladen</li>
+                    <li><code>youtube.force-ssl</code>: Titel, Beschreibung und Schlagwörter eigener geplanter Videos ändern,
+                        Kommentare zu eigenen Videos lesen</li>
+                    <li><code>yt-analytics.readonly</code>: Summen zu eigenen Videos lesen (Wiedergabezeit, Teilungen,
+                        neue Abos)</li>
+                </ul>
+                <p>
+                    Details zu Speicherung, Weitergabe und Löschung stehen in der
+                    <a href="/datenschutz/">Datenschutzerklärung</a>.
+                </p>
+
+                <h2 id="english" lang="en">In English</h2>
+                <p lang="en">
+                    The Prof. Aufner Publisher is a private tool that Peter Aufner (Prof. Aufner, an Austrian teacher of
+                    computer science) runs for his own channels only. Nobody else signs in, and there are no user accounts.
+                </p>
+                <ul lang="en">
+                    <li><strong>Publishing:</strong> it posts his finished educational pieces at their scheduled time to his
+                        own YouTube channel, Instagram, Threads, Facebook Page, Bluesky, Telegram channel and this blog.</li>
+                    <li><strong>Comment digest:</strong> it reads public comments on his own posts and sends him a digest
+                        four times a day in his private Telegram chat, so he can answer; comments that suggest bullying or
+                        danger are reported at once. Commenters' names and profiles are not stored.</li>
+                    <li><strong>Statistics:</strong> it records aggregate numbers for his own posts (views, likes, watch
+                        time) and his follower counts.</li>
+                </ul>
+                <p lang="en">
+                    Google user data accessed: <code>youtube.upload</code> (upload the channel's own videos and thumbnails),
+                    <code>youtube.force-ssl</code> (update the channel's own scheduled videos, read comments on its own
+                    videos), <code>yt-analytics.readonly</code> (aggregate statistics of its own videos). How this data is
+                    used, stored, protected, shared and deleted, including the Limited Use statement, is described in the
+                    <a href="/datenschutz/#google-api">privacy policy</a>.
+                </p>
+            </article>
+        </div>
+    </main>
+
+    <footer class="site-footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-brand">
+                    <span class="logo-text">Prof. Aufner</span>
+                    <p class="footer-tagline">Digitales &amp; analoges Leben meistern</p>
+                </div>
+                <nav class="footer-nav" aria-label="Rechtliches">
+                    <a href="/datenschutz/">Datenschutz</a>
+                    <a href="/publisher/" aria-current="page">Publisher</a>
+                </nav>
+            </div>
+            <div class="footer-bottom">
+                <p class="title-footnote"><strong>Zum Titel Prof.:</strong> Prof. ist mein Berufstitel als Lehrer an einer AHS in Österreich, keine Universitätsprofessur.</p>
+                <p>&copy; 2026 Prof. Aufner. Alle Rechte vorbehalten.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="/scripts.js" defer></script>
+</body>
+
+</html>

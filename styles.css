@@ -781,6 +781,26 @@ kbd {
     margin-bottom: var(--space-sm);
 }
 
+/* Rechtstexte und Publisher-Seite: Fliesstext wie im Blog (.article-body), dazu Metazeile, Platzhalter, Footer-Links */
+.prose .meta {
+    color: var(--color-text-muted);
+    font-size: var(--text-sm);
+    margin-bottom: var(--space-xl);
+}
+
+.todo {
+    color: var(--color-alert);
+    font-weight: 600;
+}
+
+.footer-nav {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: var(--space-lg);
+    font-size: var(--text-sm);
+}
+
 /* ===================================
    Footer
    =================================== */
