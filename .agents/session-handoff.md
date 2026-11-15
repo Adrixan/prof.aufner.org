@@ -98,3 +98,7 @@ Commits auf Branch: Fonts, Styles, HTML-Refactor, SEO-Assets, Legal-Seiten, Secu
 - Open decisions: none. Optional for Peter: shorten the rotation in Plesk (Websites & Domains > prof.aufner.org > Logs >
   Log Rotation) if a shorter promise is wanted; then change the page text with it.
 - Next steps: none here; peter.aufner.org notice should say 16 days too (Code told).
+
+## Open items moved from the retired decision list (2026-11-15)
+The shared list `~/Obsidian/Adrixan/Open tasks.md` was retired on 2026-11-15 (archive `~/code/.agents/archive/open-tasks-2026-11-15.md`); these items had no other home.
+- Peter, low: all hosting sites on the Netcup Plesk account share one system user (isolation between sites); decide whether to split them.
