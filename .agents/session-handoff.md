@@ -85,3 +85,16 @@ Commits auf Branch: Fonts, Styles, HTML-Refactor, SEO-Assets, Legal-Seiten, Secu
 - Open: this file is uncommitted (includes the 2026-11-14 D14 update); commit it on `main` before the next deploy
   (`deploy/deploy.sh` needs a clean tree).
 - Next steps: none from this run; future web work follows AGENTS.md "Web platform".
+
+## Update 2026-11-15 (log retention, follow-up to D52)
+- Trajectory: brief from Code (follow-up while doing D52 on peter.aufner.org, not a new decision of Peter's). `/datenschutz/`
+  said "nach 14 Tagen gelöscht". Host check (one SSH session, chroot `~/logs/prof.aufner.org/`): rotation daily at about
+  11:40, stats run about 11:49; `access_ssl_log` (current) -> `.processed` -> `.processed.1` .. `.14`. Oldest entry on
+  2026-11-15 06:22 was 30 Oct 14:30, so entries live 15 to 16 days, not 15 as the brief guessed. nginx proxy logs are
+  truncated daily by the stats run. peter.aufner.org and aufner.org have the same layout (14 rotated, oldest 30 Oct).
+- Change: sentence now "Logfiles werden täglich rotiert; jeder Eintrag wird spätestens nach 16 Tagen gelöscht.", "Stand"
+  15 November 2026. Commit 1310428, merge e25609e, pushed, deployed (smoke test green), live check with a desktop UA found
+  the new text. Rule updated in AGENTS.md "Legal pages".
+- Open decisions: none. Optional for Peter: shorten the rotation in Plesk (Websites & Domains > prof.aufner.org > Logs >
+  Log Rotation) if a shorter promise is wanted; then change the page text with it.
+- Next steps: none here; peter.aufner.org notice should say 16 days too (Code told).
