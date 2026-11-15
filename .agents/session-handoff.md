@@ -65,3 +65,23 @@ Commits auf Branch: Fonts, Styles, HTML-Refactor, SEO-Assets, Legal-Seiten, Secu
   deletes `datenschutz/`; its smoke test expects both pages with 200. Rules in AGENTS.md "Legal pages".
 - Peter still: consent screen URLs, DNS TXT for aufner.org at Porkbun (Search Console domain property), demo video,
   resubmit. Details in edu-publisher `.agents/session-handoff.md`.
+
+## Update 2026-11-14 (D14 A, provider disclosure)
+- Trajectory: Peter decided D14 A in `~/Obsidian/Adrixan/Open tasks.md` (saved 18:24). Section 1 of `/datenschutz/` is
+  now "Verantwortlicher und Offenlegung" with paragraph `#offenlegung`: § 25 MedienG / § 5 ECG, Peter Aufner, Graz,
+  Österreich, prof@aufner.org, purpose (private educational offer, links to channels, voluntary Ko-fi support).
+  "Stand" 14 November 2026. Commit 2a4c219, merge 4a819a7, pushed, deployed (smoke test green), live check with a
+  desktop UA found the anchor. Rule recorded in AGENTS.md "Legal pages".
+- Residual (known with option A, no action unless Peter reopens): § 5 Abs. 1 Z 2 ECG asks for a geographic address
+  once the site counts as a commercial service; Graz alone meets § 25 MedienG for a small website.
+- Open decisions: none from D14. Older open points in AGENTS.md (footer title wording, HSTS preload, Art. 50 AI Act) unchanged.
+- Next steps: none for D14; wording should match peter.aufner.org (session "Code: peter.aufner.org" was sent the text).
+
+## Update 2026-11-15 (web-modernize run)
+- Trajectory: standing order 2026-11-11, timer `web-modernize`. `legacy-scan` on all frontend sources and the repo root: 0 findings
+  (35 rules); scanner verified with a probe. The `scripts.js` scrollspy was checked against guide `scrollspy` and dropped
+  (`scroll-target-group` is Chrome/Edge 140 only and still needs the IntersectionObserver fallback and JS for `aria-current`).
+- No code change, no commit, no deploy. Report: `~/sync/ai/web-modernize/2026-11-15/prof.aufner.org.md`.
+- Open: this file is uncommitted (includes the 2026-11-14 D14 update); commit it on `main` before the next deploy
+  (`deploy/deploy.sh` needs a clean tree).
+- Next steps: none from this run; future web work follows AGENTS.md "Web platform".
