@@ -67,7 +67,7 @@ Commits auf Branch: Fonts, Styles, HTML-Refactor, SEO-Assets, Legal-Seiten, Secu
   resubmit. Details in edu-publisher `.agents/session-handoff.md`.
 
 ## Update 2026-11-14 (D14 A, provider disclosure)
-- Trajectory: Peter decided D14 A in `~/Obsidian/Adrixan/Open tasks.md` (saved 18:24). Section 1 of `/datenschutz/` is
+- Trajectory: Peter decided D14 A in `~/code/.agents/archive/open-tasks-2026-11-15.md` (saved 18:24). Section 1 of `/datenschutz/` is
   now "Verantwortlicher und Offenlegung" with paragraph `#offenlegung`: § 25 MedienG / § 5 ECG, Peter Aufner, Graz,
   Österreich, prof@aufner.org, purpose (private educational offer, links to channels, voluntary Ko-fi support).
   "Stand" 14 November 2026. Commit 2a4c219, merge 4a819a7, pushed, deployed (smoke test green), live check with a
